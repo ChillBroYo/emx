@@ -3,6 +3,7 @@ import html
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
+# Reverses signs if a sign is passed in, otherwise copies inital_value
 def reverseOrEquals(initial_value, compare_value):
     if compare_value == ">":
         return "<"
@@ -13,9 +14,13 @@ def reverseOrEquals(initial_value, compare_value):
     else:
         raise Exception("Unknown values")
 
+# Solves logical switch puzzle
 def puzzleSolver(puzzle_items):
     solution_response = {}
     slots = ["X"]
+
+    # Skip first 2 lines as they are the question asked and ABCD
+    # First, walk through each set and collect discovred value
     for y in range(2, len(puzzle_items)):
         did_append = False
         for x in range(1, len(puzzle_items[y])):
@@ -31,6 +36,7 @@ def puzzleSolver(puzzle_items):
             slots.append("=")
 
 
+    # Second walk though each set and creat new final lists based on the inverse if previous values and extracted ones
     for y in range(2, len(puzzle_items)):
         key = ""
         final_list = []
@@ -50,6 +56,7 @@ def puzzleSolver(puzzle_items):
         solution_response[key] = "".join(final_list)
 
 
+    # Nicley format string in concat map format
     return_string = " ABCD"
     for response in solution_response:
         return_string += "\n{}{}".format(response, solution_response[response])
@@ -81,9 +88,10 @@ def EmxPoll(request):
     elif question == "Email Address":
         return HttpResponse("samsonsmtse@gmail.com")
     elif question == "Source":
-        # TODO
-        return HttpResponse("Appying for a Principal Software Engineer Role")
+        return HttpResponse("https://github.com/ChillBroYo/emx")
     elif question == "Puzzle":
+
+        # Split the puzzle into new lines, discard the last new line and pipe it into the solver
         puzzle_items = description.split("\n")
         puzzle_items.pop()
         return HttpResponse(puzzleSolver(puzzle_items))

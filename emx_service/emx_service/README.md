@@ -1,6 +1,5 @@
 Steps for deployment:
 ---------------------
-
 (1) Run Server
 ---------------------------
 Run the server on port 8080 with:
