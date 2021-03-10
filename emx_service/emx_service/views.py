@@ -78,7 +78,7 @@ def EmxPoll(request):
     elif question == "Name":
         return HttpResponse("Samson Tse")
     elif question == "Resume":
-        return HttpResponse("Resume link: https://www.dropbox.com/s/wuoi6tmlz86y27j/samson_resume_2021.pdf?dl=0")
+        return HttpResponse("Resume link: https://www.dropbox.com/s/wuoi6tmlz86y27j/samson_resume_2021.pdf?dl=0 || Cover Letter Link: https://www.dropbox.com/s/l0qe1b0yciazq5u/samson_cover_letter_2021.pdf?dl=0")
     elif question == "Years":
         return HttpResponse("I have 5 years of experience with Software Engineering")
     elif question == "Position":
